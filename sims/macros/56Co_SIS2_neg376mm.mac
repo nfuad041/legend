@@ -1,0 +1,26 @@
+# Management 
+/MG/manager/mglog routine
+/MG/manager/seedWithUUID
+
+# Process List
+/MG/processes/realm BBdecay
+/MG/processes/lowenergy true
+
+# Configure Detector
+/MG/geometry/detector LGND_200_Baseline #full list of available legend geometries: /global/u2/f/fnafis/legend/legend-swdev-scripts/MaGe/source/data/legendgeometry/
+/MG/L200/CalibrationOn true
+/MG/L200/CalibrationSetSourceNumber 42 # 41, 42, 43, 44 = SIS
+/MG/L200/CalibrationSetSourceHeight -376 mm # -96,24,124,224
+/MG/L200/CalibrationSetTaAbsorber false
+/MG/L200/CalibrationSetCuAbsorber false
+/MG/geometry/WorldMaterial Vacuum 
+# Initialize Geant4 and geometry
+/run/initialize
+/MG/eventaction/rootschema MCRun
+/MG/io/MCRun/SetSensitiveIDLabelScheme askGeom
+/MG/eventaction/reportingfrequency 100
+/MG/eventaction/rootfilename /global/homes/f/fnafis/56Co_SIS2_neg376mm_test.root
+/MG/generator/select LGND200Calibration
+/MG/generator/LGND200Calibration/setZ 27 # proton number for 56Co = 27
+/MG/generator/LGND200Calibration/setA 56 # for 56CO = 56
+/run/beamOn 1000

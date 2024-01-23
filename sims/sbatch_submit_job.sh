@@ -12,14 +12,17 @@
 #SBATCH -A m2676
 #SBATCH -t 5:00:00
 
-cp /global/homes/f/fnafis/MAGE_FILES/56Co_SIS2_neg376mm.mac /global/homes/f/fnafis/MAGE_FILES/56Co_SIS2_neg376mm_${SLURM_JOB_ID}.mac
+BASE_MACRO_DIR=/global/homes/f/fnafis/LEGEND/legend/sims/macros
+TEMP_MACRO_DIR=/global/homes/f/fnafis/LEGEND/temp
+MPP=/global/homes/f/fnafis/LEGEND/legend/sims/mpp.sh
 
-sed -i "s/neg376mm.*/neg376mm_${SLURM_JOB_ID}.root/g" /global/homes/f/fnafis/MAGE_FILES/56Co_SIS2_neg376mm_${SLURM_JOB_ID}.mac
+cp ${BASE_MACRO_DIR}/56Co_SIS2_neg376mm.mac ${TEMP_MACRO_DIR}/56Co_SIS2_neg376mm_${SLURM_JOB_ID}.mac
 
-shifter bash -c "source /global/homes/f/fnafis/MAGE_FILES/setup_mage.sh;
-MaGe /global/homes/f/fnafis/MAGE_FILES/56Co_SIS2_neg376mm_${SLURM_JOB_ID}.mac;
-source /global/cfs/cdirs/m2676/users/nfuad/LEGEND/SIMS/mpp.sh ${SLURM_JOB_ID} > /global/cfs/cdirs/m2676/users/nfuad/LEGEND/SIMS/mpp.sh.${SLURM_JOB_ID}.out;
-echo '/global/cfs/cdirs/m2676/users/nfuad/LEGEND/SIMS/56Co_SIS2_neg376mm_${SLURM_JOB_ID}_evt.root' | cat /global/cfs/cdirs/m2676/users/nfuad/LEGEND/SIMS/evt_filenames.txt;
+sed -i "s/neg376mm.*/neg376mm_${SLURM_JOB_ID}.root/g" ${TEMP_MACRO_DIR}/56Co_SIS2_neg376mm_${SLURM_JOB_ID}.mac
+
+shifter bash -c "source /global/homes/f/fnafis/LEGEND/setup_mage.sh;
+MaGe ${TEMP_MACRO_DIR}/56Co_SIS2_neg376mm_${SLURM_JOB_ID}.mac;
+source ${MPP} ${SLURM_JOB_ID}
 "
 
 

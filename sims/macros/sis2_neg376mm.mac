@@ -19,16 +19,15 @@
 /run/initialize
 /MG/eventaction/rootschema MCRun
 /MG/io/MCRun/SetSensitiveIDLabelScheme askGeom
-/MG/eventaction/reportingfrequency 100
-# /MG/eventaction/rootfilename /global/cfs/cdirs/m2676/users/nfuad/56Co_SIS2_neg376mm_test.root
-/MG/eventaction/rootfilename ~/56Co_SIS2_neg376mm_test_with_one_gamma_2.root
+/MG/eventaction/reportingfrequency 10000
+/MG/eventaction/rootfilename /global/cfs/cdirs/m2676/users/nfuad/gamma_3009_sim/sis2_neg376mm.root
 # /MG/generator/select LGND200Calibration
 /MG/generator/select SPS
 /gps/particle gamma
 /gps/pos/type Point
-/gps/pos/centre 0. 0. -376. mm
+/gps/pos/centre -121. -97. -376. mm
 /gps/ang/type iso
 /gps/energy 3.009 MeV
 # /MG/generator/LGND200Calibration/setZ 27 # proton number for 56Co = 27
 # /MG/generator/LGND200Calibration/setA 56 # for 56CO = 56
-/run/beamOn 1000000
+/run/beamOn 10000

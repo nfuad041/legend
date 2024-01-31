@@ -10,7 +10,7 @@
 
 #SBATCH -o /global/cfs/cdirs/m2676/users/nfuad/56Co_line_source_sim/Co56_SIS2_neg376_%j.out
 #SBATCH -A m2676
-#SBATCH -t 1:00:00
+#SBATCH -t 4:00:00
 
 BASE_MACRO_DIR=/global/homes/f/fnafis/LEGEND/legend/sims/macros
 TEMP_MACRO_DIR=/global/homes/f/fnafis/LEGEND/temp

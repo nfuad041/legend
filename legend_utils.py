@@ -199,7 +199,7 @@ def convert_height_map_to_mage_ref_frame(height_map=None, pos_0101=357.4):
         for row in height_map.index:
             if height_map.loc[row, col] != '.':
                 new_map.loc[row, col] = -1*height_map.loc[row, col] + offset
-    return new_map
+    return new_map-400
 
 
 def convert_height_map_to_sis_ref_frame(height_map=None, mage_pos_0101=357.4, sis_pos_0101=8046.4):
@@ -321,5 +321,91 @@ def get_fwhm_map_from_config(geom_df=None, config_filename='/global/cfs/cdirs/m2
     # start row numbers from 1
     map.index = np.arange(1, len(map)+1)
     return map
+
+
+from scipy.optimize import curve_fit
+import numpy as np
+
+def fit_peak_binned_extra_basic(x, y, sigma_guess=None, fixed_mu=None, axis=None, xlabel=None, ylabel=None, title=None, verbose=False, legend=False, **kwargs):
+    binsize = x[1]-x[0]
+    # check if x and y are of same length
+    if len(x) != len(y):
+        print("x and y must be of same length")
+        return None
+    # setting the functions
+    def gauss(x, A, mu, sigma):
+        return A* np.exp(-(x-mu)**2 / (2*sigma**2))
+    def quad_bkg(x, p0, p1, p2):
+        return p0 + p1*x + p2*x**2
+    def gauss_with_quad_bkg(x,  A, mu, sigma, p0, p1, p2):
+            return gauss(x, A, mu, sigma) + quad_bkg(x, p0, p1, p2)
+    def gauss_fixed_mu(x, A, sigma):
+        return gauss(x, A, fixed_mu, sigma)
+    def gauss_with_quad_bkg_fixed_mu(x,  A, sigma, p0, p1, p2):
+            return gauss_fixed_mu(x, A, sigma) + quad_bkg(x, p0, p1, p2)
+    if fixed_mu is None:
+        func = gauss_with_quad_bkg
+    else:
+        print(f"mean of gaussian fixed at = {fixed_mu}")
+        func = gauss_with_quad_bkg_fixed_mu
+
+    # setting the initial guesses, keeping in mind that if mu is fixed, it is not a parameter anymore
+    if sigma_guess is None:
+        if fixed_mu is None:
+            guesses = [np.max(y), x[np.argmax(y)], 1, 0, 0, 0]
+        else:
+            guesses = [np.max(y), 1, 0, 0, 0]
+    else:
+        if fixed_mu is None:
+            guesses = [np.max(y), x[np.argmax(y)], sigma_guess, 0, 0, 0]
+        else:
+            guesses = [np.max(y), sigma_guess, 0, 0, 0]
+
+    if verbose:
+        print(f"initial guesses = {guesses}")
+    # try to fit
+    try:
+        popt, pcov = curve_fit(func, x, y, p0=guesses) # not taking variance into account, need iminuit. But scipy has few more options for curve_fit here: https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.curve_fit.html
+        perr = np.sqrt(np.diag(pcov))
+        # extract the important parameters
+        A = popt[0]
+        A_err = perr[0]
+        sigma = popt[2] if fixed_mu is None else popt[1]
+        sigma_err = perr[2] if fixed_mu is None else perr[1]
+        cov_A_sigma = pcov[0,2] if fixed_mu is None else pcov[0,1]
+        # calculate the fwhm
+        fwhm = 2.355*sigma
+        fwhm_err = 2.355*sigma_err
+        # calculate the area
+        area = np.sqrt(2*np.pi)*A*sigma/binsize
+        area_err = area*np.sqrt((A_err/A)**2 + (sigma_err/sigma)**2 + 2*cov_A_sigma/(A*sigma)) # https://www.ucl.ac.uk/~ucfbpve/geotopes/indexch10.html
+        
+        
+        # and plot if an axis is given
+        if axis is not None:
+            x = np.linspace(x[0], x[-1], 1000)
+            total_fit = func(x, *popt)
+            axis.plot(x, total_fit, label='fit gauss+quad bkg', **kwargs)
+            if fixed_mu is None:
+                bkg_subtracted_fit = gauss(x, *popt[:3])
+            else:
+                bkg_subtracted_fit = gauss_fixed_mu(x, *popt[:2])
+            axis.plot(x, bkg_subtracted_fit, label='fit gauss', **kwargs)
+            axis.set_xlabel(xlabel)
+            axis.set_ylabel(ylabel)
+            axis.set_title(title)
+            if legend:
+                axis.legend()
+    except:
+        print("fit failed")
+        popt = None
+        perr = None
+        pcov = None
+        fwhm = None
+        fwhm_err = None
+        area = None
+        area_err = None
+
+    return {'popt':popt, 'perr': perr, 'pcov':pcov, 'fwhm':fwhm, 'fwhm_err':fwhm_err, 'area':area, 'area_err':area_err}
 
 

@@ -20,12 +20,12 @@
 /MG/eventaction/rootschema MCRun
 /MG/io/MCRun/SetSensitiveIDLabelScheme askGeom
 /MG/eventaction/reportingfrequency 10000
-/MG/eventaction/rootfilename /global/cfs/cdirs/m2676/users/nfuad/gamma_3009_sim/sis2_neg376mm_revXY.root
+/MG/eventaction/rootfilename /global/cfs/cdirs/m2676/users/nfuad/gamma_3009_sim/sis2_neg276mm.root
 # /MG/generator/select LGND200Calibration
 /MG/generator/select SPS
 /gps/particle gamma
 /gps/pos/type Point
-/gps/pos/centre -97. -121. -376. mm
+/gps/pos/centre -121. -97. -276. mm
 /gps/ang/type iso
 /gps/energy 3.009 MeV
 # /MG/generator/LGND200Calibration/setZ 27 # proton number for 56Co = 27

@@ -30,4 +30,4 @@
 /gps/energy 3.009 MeV
 # /MG/generator/LGND200Calibration/setZ 27 # proton number for 56Co = 27
 # /MG/generator/LGND200Calibration/setA 56 # for 56CO = 56
-/run/beamOn 100000
+/run/beamOn 1000

@@ -1,0 +1,13 @@
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228674_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228676_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228679_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228681_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228682_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228683_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228685_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228687_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228689_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228691_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228694_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228696_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_sim/sis1_pos1_gamma3009_21228698_evt.root

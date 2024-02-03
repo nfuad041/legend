@@ -1,0 +1,2 @@
+/global/cfs/cdirs/m2676/users/nfuad/56Co_line_source_sim/56Co_SIS2_neg376mm_19184601_evt.root
+/global/cfs/cdirs/m2676/users/nfuad/56Co_line_source_sim/56Co_SIS2_neg376mm_19184602_evt.root

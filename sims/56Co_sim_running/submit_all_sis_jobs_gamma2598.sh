@@ -1,0 +1,25 @@
+#!/bin/sh
+
+source submit_job_multiple.sh sis1_pos0_gamma2598
+source submit_job_multiple.sh sis1_pos1_gamma2598
+source submit_job_multiple.sh sis1_pos2_gamma2598
+source submit_job_multiple.sh sis1_pos3_gamma2598
+source submit_job_multiple.sh sis1_pos4_gamma2598
+source submit_job_multiple.sh sis2_pos0_gamma2598
+source submit_job_multiple.sh sis2_pos1_gamma2598
+source submit_job_multiple.sh sis2_pos2_gamma2598
+source submit_job_multiple.sh sis2_pos3_gamma2598
+source submit_job_multiple.sh sis2_pos4_gamma2598
+source submit_job_multiple.sh sis3_pos0_gamma2598
+source submit_job_multiple.sh sis3_pos1_gamma2598
+source submit_job_multiple.sh sis3_pos2_gamma2598
+source submit_job_multiple.sh sis3_pos3_gamma2598
+source submit_job_multiple.sh sis3_pos4_gamma2598
+
+source submit_job_multiple.sh sis1_pos0_gamma3009
+source submit_job_multiple.sh sis2_pos0_gamma3009
+source submit_job_multiple.sh sis3_pos0_gamma3009
+
+source submit_job_multiple.sh sis1_pos0_fullCo
+source submit_job_multiple.sh sis2_pos0_fullCo
+source submit_job_multiple.sh sis3_pos0_fullCo
